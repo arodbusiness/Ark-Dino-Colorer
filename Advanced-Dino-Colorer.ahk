@@ -178,23 +178,23 @@ return
 
 GetIDs:
 	Gui, Submit, nohide
-	
+	String := ""
 	Loop, 6
 	{
 		Number := A_Index-1
-		SelectedColorID%Number% := 18
-		InputColor := InputColor%Number%
-		Loop % Colors.MaxIndex()
-		{
-			if (Colors[A_Index]=InputColor)
+		CurrentCheck := RegionCheck%Number%
+		if (CurrentCheck){
+			InputColor := InputColor%Number%
+			Loop % Colors.MaxIndex()
 			{
-				SelectedColorID%Number% := A_Index
-				break
+				if (Colors[A_Index]=InputColor)
+				{
+					String := String "cheat SetTargetDinoColor " Number " " A_Index "| "
+					break
+				}
 			}
 		}
 	}
-	
-	String := "cheat SetTargetDinoColor 0 " SelectedColorID0 "| cheat SetTargetDinoColor 1 " SelectedColorID1 "| cheat SetTargetDinoColor 2 " SelectedColorID2 "| cheat SetTargetDinoColor 3 " SelectedColorID3 "| cheat SetTargetDinoColor 4 " SelectedColorID4 "| cheat SetTargetDinoColor 5 " SelectedColorID5 
 return
 
 
