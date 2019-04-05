@@ -44,8 +44,16 @@ BuildGUI:
 		Check := A_Index=1 ? "Checked1" : "Checked0"
 		
 		Gui, Add, Radio, gSelectRegion%Number% x%x% y%y% %Check% vRadio%Number%, Region %Number%
-		Gui, Add, Checkbox, vRegionCheck%Number% x%x2% y%y% Checked1,
 		
+		
+		y := y+rowSeperation
+	}
+	
+	y := RegionsY
+	Loop, 6
+	{
+		Number := A_Index-1
+		Gui, Add, Checkbox, vRegionCheck%Number% x%x2% y%y% Checked1,
 		y := y+rowSeperation
 	}
 	
@@ -195,6 +203,7 @@ GetIDs:
 			}
 		}
 	}
+	String := substr(String,1,strLen(String)-2)
 return
 
 
@@ -209,8 +218,13 @@ return
 EnterIt:
 	GoSub, GetIDs
 	
-	WinActive("ahk_class UnrealWindow")
-	Sleep 500
+	;;WinActive("ahk_class UnrealWindow")
+	
+	MouseMove, 800, 500, 0
+	Send {MButton}
+	
+	
+	Sleep 250
 	Send {tab}
 	Sleep 100
 	Send % String
